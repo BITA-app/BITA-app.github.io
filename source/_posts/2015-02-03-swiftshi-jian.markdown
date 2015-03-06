@@ -19,7 +19,9 @@ categories:
 * AppDelegate类的声明，`class AppDelegate: UIResponder, UIApplicationDelegate`，可以看出，继承的类和遵守的协议，写法上没有什么区别。和oc不同的是，类不必都派生于一个NSObject一样的基类，你可以实现自己的基类。和oc一样，swift不支持多继承，但是可以通过协议的方式达到类似的效果。
 * AppDelegate中的属性声明：`var window: UIWindow?`，属性和成员变量，不像oc那样区分，不需要加`@property`修饰符。类中最外层（不在方法体内）声明的常量和变量，都是属性，可以通过.去获取。属性有访问级别的限制，分为public、internal、private三种，默认是internal，即可以被自己模块或应用中被访问到。
 * AppDelegate中方法声明：
-```func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool ```，可查看swift语言说明，详不赘言。
+```
+func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool 
+```，可查看swift语言说明，详不赘言。
 * 单行语句末尾不必加分号。
 
 3.接下来应该怎么写呢？
