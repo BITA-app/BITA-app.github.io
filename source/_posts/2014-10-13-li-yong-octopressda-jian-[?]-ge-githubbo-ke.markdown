@@ -7,46 +7,7 @@ categories:
 ---
 来源：http://beyondvincent.com/blog/2013/08/03/108-creating-a-github-blog-using-octopress/
 ![image](http://beyondvincent.com/images/2013/08/github_page_and-octopress.png)
-<embed src="http://player.youku.com/player.php/Type/Folder/Fid/22928516/Ob/1/sid/XODAxNTY5OTc2/v.swf" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed>
-<div style="text-align:center;">
-  <button onclick="playPause()">播放/暂停</button> 
-  <button onclick="makeBig()">大</button>
-  <button onclick="makeNormal()">中</button>
-  <button onclick="makeSmall()">小</button>
-  <br /> 
-  <video id="video1" width="420" style="margin-top:15px;">
-    <source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4
-" type="video/mp4" />
-    <source src="/example/html5/mov_bbb.ogg" type="video/ogg" />
-    Your browser does not support HTML5 video.
-  </video>
-</div> 
-<script type="text/javascript">
-var myVideo=document.getElementById("video1");
 
-function playPause()
-{ 
-if (myVideo.paused) 
-  myVideo.play(); 
-else 
-  myVideo.pause(); 
-} 
-
-function makeBig()
-{ 
-myVideo.width=560; 
-} 
-
-function makeSmall()
-{ 
-myVideo.width=320; 
-} 
-
-function makeNormal()
-{ 
-myVideo.width=420; 
-} 
-</script> 
 ##小引
 `Octopress`是利用`Jekyll`博客引擎开发的一个博客系统，生成的静态页面能够很好的在github page上展现。号称是hacker专属的一个博客系统(`A blogging framework for hackers.`)
 
