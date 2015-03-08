@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Swift实践 - 走向敏捷</title>
+  <title>Swift实践：开始swift - 走向敏捷</title>
   <meta name="author" content="Your Name">
 
   
-  <meta name="description" content="开始swift 新建项目 1.swift语言只支持iOS7.0以上的系统。 2.新建一个swift语言项目,和oc项目没有太多区别，简单看一下： .h和.m文件现在是一个.swift文件。
-oc中引入头文件，在swift中对应引入模块。#import &lt;UIKit/UIKit.h&gt; &hellip;">
+  <meta name="description" content="新建项目 1、swift语言只支持iOS7.0以上的系统。 2、新建一个swift语言项目,和oc项目没有太多区别，简单看一下： .h和.m文件现在是一个.swift文件。
+oc中引入头文件，在swift中对应引入模块。#import &lt;UIKit/UIKit.h&gt;只需写成import &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,7 +66,7 @@ oc中引入头文件，在swift中对应引入模块。#import &lt;UIKit/UIKit.h
   
   <header>
     
-      <h1 class="entry-title">Swift实践</h1>
+      <h1 class="entry-title">Swift实践：开始swift</h1>
     
     
       <p class="meta">
@@ -82,13 +82,11 @@ oc中引入头文件，在swift中对应引入模块。#import &lt;UIKit/UIKit.h
   </header>
 
 
-<div class="entry-content"><h1>开始swift</h1>
+<div class="entry-content"><h3>新建项目</h3>
 
-<h3>新建项目</h3>
+<p>1、swift语言只支持iOS7.0以上的系统。</p>
 
-<p>1.swift语言只支持iOS7.0以上的系统。</p>
-
-<p>2.新建一个swift语言项目,和oc项目没有太多区别，简单看一下：</p>
+<p>2、新建一个swift语言项目,和oc项目没有太多区别，简单看一下：</p>
 
 <ul>
 <li>.h和.m文件现在是一个.swift文件。</li>
@@ -101,40 +99,43 @@ oc中引入头文件，在swift中对应引入模块。#import &lt;UIKit/UIKit.h
 
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -&gt; Bool </span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>func application(application: UIApplication,didFinishLaunchingWithOptions launchOptions:[NSObject:AnyObject]?) -&gt; Bool </span></code></pre></td></tr></table></div></figure>
 
 
-<p>，可查看swift语言说明，详不赘言。
-* 单行语句末尾不必加分号。</p>
+<p>，可查看swift语言说明，详不赘言。</p>
 
-<p>3.接下来应该怎么写呢？</p>
+<ul>
+<li>单行语句末尾不必加分号。</li>
+</ul>
+
+
+<p>3、
+    接下来应该怎么写呢？</p>
 
 <h3>UIViewController</h3>
 
-<p>1.viewDidLoad方法，子类继承父类的方法，需要加override关键字。</p>
+<p>1、viewDidLoad方法，子类继承父类的方法，需要加override关键字。</p>
 
-<p>2.如果要在view上添加一个tableView：</p>
+<p>2、如果要在view上添加一个tableView：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>let tableView = UITableView(frame: self.view.frame)
 </span><span class='line'>tableView.backgroundColor = UIColor.redColor()
-</span><span class='line'>self.view.addSubview(tableView)</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>self.view.addSubview(tableView)   </span></code></pre></td></tr></table></div></figure>
 
 
-<p>生成一个UITableView的实例，不需要经过alloc、initWithFrame等方法调用，而是直接使用UITableView的构造器（initializer）。如不需要设定frame，可以直接写成UITableView()。
-方法调用使用.符号，更接近其它语言的语法。</p>
+<p>生成一个UITableView的实例，不需要经过alloc、initWithFrame等方法调用，而是直接使用UITableView的构造器（initializer）。如不需要设定frame，可以直接写成UITableView()。方法调用使用.符号，更接近其它语言的语法。</p>
 
-<p>3.从nib中添加一个IBOutlet属性：</p>
+<p>3、从nib中添加一个IBOutlet属性：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>@IBOutlet var scrollView : UIScrollView!</span></code></pre></td></tr></table></div></figure>
 
 
-<p>!表示强行拆包，也就是说这个变量一定要有非nil的值。详情可查阅swift语言中optional变量和?、!的说明。</p>
-
-<p>添加一个IBAction方法：</p>
+<p>  !表示强行拆包，也就是说这个变量一定要有非nil的值。详情可查阅swift语言中optional变量和?、!的说明。  <br/>
+    添加一个IBAction方法：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -142,7 +143,7 @@ oc中引入头文件，在swift中对应引入模块。#import &lt;UIKit/UIKit.h
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-<p>4.如需打印log，可以使用println函数。如<code>println("tableview frame:\(tableView.frame)")</code>其中，使用(variable)的方式可以将变量格式化插入到字符串中。</p>
+<p>4、如需打印log，可以使用println函数。如<code>println("tableview frame:\(tableView.frame)")</code>其中，使用<code>\(variable)</code>的方式可以将变量格式化插入到字符串中。</p>
 </div>
 
 
@@ -189,7 +190,7 @@ oc中引入头文件，在swift中对应引入模块。#import &lt;UIKit/UIKit.h
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2015/02/03/swiftshi-jian/">Swift实践</a>
+        <a href="/blog/2015/02/03/swiftshi-jian/">Swift实践：开始swift</a>
       </li>
     
       <li class="post">

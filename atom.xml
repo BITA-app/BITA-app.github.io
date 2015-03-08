@@ -4,7 +4,7 @@
   <title><![CDATA[走向敏捷]]></title>
   <link href="http://bita-app.github.io/atom.xml" rel="self"/>
   <link href="http://bita-app.github.io/"/>
-  <updated>2015-03-06T14:17:37+08:00</updated>
+  <updated>2015-03-08T22:48:01+08:00</updated>
   <id>http://bita-app.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -14,17 +14,15 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Swift实践]]></title>
+    <title type="html"><![CDATA[Swift实践：开始swift]]></title>
     <link href="http://bita-app.github.io/blog/2015/02/03/swiftshi-jian/"/>
     <updated>2015-02-03T20:38:25+08:00</updated>
     <id>http://bita-app.github.io/blog/2015/02/03/swiftshi-jian</id>
-    <content type="html"><![CDATA[<h1>开始swift</h1>
+    <content type="html"><![CDATA[<h3>新建项目</h3>
 
-<h3>新建项目</h3>
+<p>1、swift语言只支持iOS7.0以上的系统。</p>
 
-<p>1.swift语言只支持iOS7.0以上的系统。</p>
-
-<p>2.新建一个swift语言项目,和oc项目没有太多区别，简单看一下：</p>
+<p>2、新建一个swift语言项目,和oc项目没有太多区别，简单看一下：</p>
 
 <ul>
 <li>.h和.m文件现在是一个.swift文件。</li>
@@ -37,40 +35,43 @@
 
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -&gt; Bool </span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>func application(application: UIApplication,didFinishLaunchingWithOptions launchOptions:[NSObject:AnyObject]?) -&gt; Bool </span></code></pre></td></tr></table></div></figure>
 
 
-<p>，可查看swift语言说明，详不赘言。
-* 单行语句末尾不必加分号。</p>
+<p>，可查看swift语言说明，详不赘言。</p>
 
-<p>3.接下来应该怎么写呢？</p>
+<ul>
+<li>单行语句末尾不必加分号。</li>
+</ul>
+
+
+<p>3、
+    接下来应该怎么写呢？</p>
 
 <h3>UIViewController</h3>
 
-<p>1.viewDidLoad方法，子类继承父类的方法，需要加override关键字。</p>
+<p>1、viewDidLoad方法，子类继承父类的方法，需要加override关键字。</p>
 
-<p>2.如果要在view上添加一个tableView：</p>
+<p>2、如果要在view上添加一个tableView：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>let tableView = UITableView(frame: self.view.frame)
 </span><span class='line'>tableView.backgroundColor = UIColor.redColor()
-</span><span class='line'>self.view.addSubview(tableView)</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>self.view.addSubview(tableView)   </span></code></pre></td></tr></table></div></figure>
 
 
-<p>生成一个UITableView的实例，不需要经过alloc、initWithFrame等方法调用，而是直接使用UITableView的构造器（initializer）。如不需要设定frame，可以直接写成UITableView()。
-方法调用使用.符号，更接近其它语言的语法。</p>
+<p>生成一个UITableView的实例，不需要经过alloc、initWithFrame等方法调用，而是直接使用UITableView的构造器（initializer）。如不需要设定frame，可以直接写成UITableView()。方法调用使用.符号，更接近其它语言的语法。</p>
 
-<p>3.从nib中添加一个IBOutlet属性：</p>
+<p>3、从nib中添加一个IBOutlet属性：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>@IBOutlet var scrollView : UIScrollView!</span></code></pre></td></tr></table></div></figure>
 
 
-<p>!表示强行拆包，也就是说这个变量一定要有非nil的值。详情可查阅swift语言中optional变量和?、!的说明。</p>
-
-<p>添加一个IBAction方法：</p>
+<p>  !表示强行拆包，也就是说这个变量一定要有非nil的值。详情可查阅swift语言中optional变量和?、!的说明。  <br/>
+    添加一个IBAction方法：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -78,7 +79,7 @@
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-<p>4.如需打印log，可以使用println函数。如<code>println("tableview frame:\(tableView.frame)")</code>其中，使用(variable)的方式可以将变量格式化插入到字符串中。</p>
+<p>4、如需打印log，可以使用println函数。如<code>println("tableview frame:\(tableView.frame)")</code>其中，使用<code>\(variable)</code>的方式可以将变量格式化插入到字符串中。</p>
 ]]></content>
   </entry>
   
@@ -88,55 +89,7 @@
     <updated>2014-10-13T11:00:34+08:00</updated>
     <id>http://bita-app.github.io/blog/2014/10/13/li-yong-octopressda-jian-[?]-ge-githubbo-ke</id>
     <content type="html"><![CDATA[<p>来源：<a href="http://beyondvincent.com/blog/2013/08/03/108-creating-a-github-blog-using-octopress/">http://beyondvincent.com/blog/2013/08/03/108-creating-a-github-blog-using-octopress/</a>
-<img src="http://beyondvincent.com/images/2013/08/github_page_and-octopress.png" alt="image" />
-<embed src="http://player.youku.com/player.php/Type/Folder/Fid/22928516/Ob/1/sid/XODAxNTY5OTc2/v.swf" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed></p>
-
-<div style="text-align:center;">
-  <button onclick="playPause()">播放/暂停</button> 
-  <button onclick="makeBig()">大</button>
-  <button onclick="makeNormal()">中</button>
-  <button onclick="makeSmall()">小</button>
-  <br /> 
-  <video id="video1" width="420" style="margin-top:15px;">
-    <source src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4
-" type="video/mp4" />
-    <source src="http://bita-app.github.io/example/html5/mov_bbb.ogg" type="video/ogg" />
-    Your browser does not support HTML5 video.
-  </video>
-</div>
-
-
-<p> </p>
-
-<script type="text/javascript">
-var myVideo=document.getElementById("video1");
-
-function playPause()
-{ 
-if (myVideo.paused) 
-  myVideo.play(); 
-else 
-  myVideo.pause(); 
-} 
-
-function makeBig()
-{ 
-myVideo.width=560; 
-} 
-
-function makeSmall()
-{ 
-myVideo.width=320; 
-} 
-
-function makeNormal()
-{ 
-myVideo.width=420; 
-} 
-</script>
-
-
-<p> </p>
+<img src="http://beyondvincent.com/images/2013/08/github_page_and-octopress.png" alt="image" /></p>
 
 <h2>小引</h2>
 
