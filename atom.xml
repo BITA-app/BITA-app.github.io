@@ -4,7 +4,7 @@
   <title><![CDATA[走向敏捷]]></title>
   <link href="http://bita-app.github.io/atom.xml" rel="self"/>
   <link href="http://bita-app.github.io/"/>
-  <updated>2015-03-15T18:07:43+08:00</updated>
+  <updated>2015-03-15T18:16:22+08:00</updated>
   <id>http://bita-app.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -20,7 +20,7 @@
     <id>http://bita-app.github.io/blog/2015/03/15/jie-jue-xcodesheng-ji-hou-cha-jian-shi-xiao-de-wen-ti</id>
     <content type="html"><![CDATA[<h2>问题</h2>
 
-<p> 今天升级了xcode到6.2，给代码加注释的时候习惯性的输入了///，发现并没有自动生成注释格式。又看了一下菜单栏，所有之前安装的插件都消失了。怎么把他们找回来呢？查了下，找到以下解决方案。</p>
+<p> 今天升级了xcode到6.2，给代码加注释的时候习惯性的输入了///，发现并没有自动生成注释格式。又看了一下菜单栏，并没有找到VVDocuments插件，而且所有之前安装的插件都消失了。怎么把他们找回来呢？查了下，找到以下解决方案。</p>
 
 <h2>解决方案</h2>
 
