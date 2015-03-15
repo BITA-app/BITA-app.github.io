@@ -9,8 +9,7 @@
   <meta name="author" content="Your Name">
 
   
-  <meta name="description" content="新建项目 1、swift语言只支持iOS7.0以上的系统。 2、新建一个swift语言项目,和oc项目没有太多区别，简单看一下： .h和.m文件现在是一个.swift文件。
-oc中引入头文件，在swift中对应引入模块。#import &lt;UIKit/UIKit.h&gt;只需写成import &hellip;">
+  <meta name="description" content="问题 今天升级了xcode到6.2，给代码加注释的时候习惯性的输入了///，发现并没有自动生成注释格式。又看了一下菜单栏，所有之前安装的插件都消失了。怎么把他们找回来呢？查了下，找到以下解决方案。 解决方案 前往到插件安装目录：~/Library/Application Support/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -63,6 +62,53 @@ oc中引入头文件，在swift中对应引入模块。#import &lt;UIKit/UIKit.h
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/15/jie-jue-xcodesheng-ji-hou-cha-jian-shi-xiao-de-wen-ti/">解决Xcode升级后插件失效的问题</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-15T17:24:59+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:24 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>问题</h2>
+
+<p> 今天升级了xcode到6.2，给代码加注释的时候习惯性的输入了///，发现并没有自动生成注释格式。又看了一下菜单栏，所有之前安装的插件都消失了。怎么把他们找回来呢？查了下，找到以下解决方案。</p>
+
+<h2>解决方案</h2>
+
+<ol>
+<li>前往到插件安装目录：~/Library/Application Support/Developer/Shared/Xcode/Plug-ins；</li>
+<li>右键单击需要修改的插件==》显示包内容==》双击Contents==》打开Info.plist文件；</li>
+<li>找到 DVTPlugInCompatibilityUUIDs，这是个数组，包含多条记录，在其中添加一条<code>A16FF353-8441-459E-A50C-B071F53F51B7</code>。</li>
+<li>重启xcode，修改过的插件就回来了。</li>
+</ol>
+
+
+<h2>原理</h2>
+
+<p><code>A16FF353-8441-459E-A50C-B071F53F51B7</code>是什么鬼？<code>DVTPlugInCompatibilityUUIDs</code>又是什么东东？查了一下，原来为了解决插件兼容性的问题，<code>DVTPlugInCompatibilityUUIDs</code>会保存支持的Xcode版本对应的uuid，而<code>A16FF353-8441-459E-A50C-B071F53F51B7</code>就是Xcode6.2对应的uuid。</p>
+
+<p>那么怎么查到当前版本的uuid呢？去这个文件下找就可以了<code>/Applications/Xcode.app/Contents/PlugIns/DVTiOSPlistStructDefs.dvtplugin/Contents/Info.plist</code>。当然，有时候Xcode的安装路径会有所改变，下面的目录结构也会有所改变，总之打开Xcode的app包，搜索一下这个关键字就可以了。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -361,6 +407,10 @@ config.yml是博客重要的一个配置文件，在config.yml文件中有三大
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/15/jie-jue-xcodesheng-ji-hou-cha-jian-shi-xiao-de-wen-ti/">解决Xcode升级后插件失效的问题</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2015/02/03/swiftshi-jian/">Swift实践：开始swift</a>
