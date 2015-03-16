@@ -3,11 +3,12 @@ layout: post
 title: "解决Xcode升级后插件失效的问题"
 date: 2015-03-15 17:24:59 +0800
 comments: true
+keywords: Xcode,6.2,VVDocumenter,插件,失效
 categories: 
 ---
 
 ##问题
- 今天升级了xcode到6.2，给代码加注释的时候习惯性的输入了///，发现并没有自动生成注释格式。又看了一下菜单栏，并没有找到VVDocuments插件，而且所有之前安装的插件都消失了。怎么把他们找回来呢？查了下，找到以下解决方案。
+ 今天升级了xcode到6.2，给代码加注释的时候习惯性的输入了///，发现并没有自动生成注释格式。又看了一下菜单栏，并没有找到VVDocumenter插件，而且所有之前安装的插件都消失了。怎么把他们找回来呢？查了下，找到以下解决方案。
  
 ## 解决方案
 1.	前往到插件安装目录：~/Library/Application Support/Developer/Shared/Xcode/Plug-ins；
