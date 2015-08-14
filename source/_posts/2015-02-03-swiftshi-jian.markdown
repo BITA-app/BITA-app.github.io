@@ -7,8 +7,8 @@ categories:
 ---
 
 ###引言
-声称一种语言优于另一种语言被认为是不礼貌的行为。但是，没有一个编程语言的设计者会相信“不同的语言各有千秋”这种文绉绉的客套话。	
-	————《黑客与画家》
+声称一种语言优于另一种语言被认为是不礼貌的行为。但是，没有一个编程语言的设计者会相信“不同的语言各有千秋”这种文绉绉的客套话。                                                    ————《黑客与画家》
+
 oc在语言排行榜上的位次逐月下降，而swift在逐月上升。相信swift取代oc的地位不会太久远。开始学习和使用swift吧，至少可以通过swift这扇窗，接触很多其它语言的编程思想。
 ###新建项目
 
@@ -61,9 +61,10 @@ self.view.addSubview(tableView)
 4、如需打印log，可以使用println函数。如`println("tableview frame:\(tableView.frame)")`其中，使用`\(variable)`的方式可以将变量格式化插入到字符串中。
 
 ###和oc混编
-1、swift中引用oc类：
+1、swift中引用oc类：	
 如果是swift项目，初次创建oc文件，会有提示创建一个桥接头文件，只需将需要引用的oc类的头文件在桥接文件中引入即可。
+
 更一般的，可以在工程文件中，选中相应的target，在Build Settings一栏中搜Objective-C Bridging Header一项，指定一个头文件，并在这个头文件中import需要引用的oc类的头文件即可。
 
-2、oc中引用swift类：
+2、oc中引用swift类：	
 更简单，只需先找到你要引用的swift类所在的module名。一般在target的Build Settings中，搜索Product Module Name一项。比如我查到这一项的配置是YCApp，然后在需要引入swift类的oc文件中，import "YCApp-swift.h"即可，这样这个module下所有的类（有一个限制，那就是继承自NSObject的类，否则oc不能识别。）都可以在这个oc文件中使用了。这个头文件在工程中找不到，但是按cmd并点击可以看到它的内容。clean之后重新编译会重新生成。so easy。
