@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[走向敏捷]]></title>
+  <link href="http://bita-app.github.io/atom.xml" rel="self"/>
+  <link href="http://bita-app.github.io/"/>
+  <updated>2015-08-14T16:06:12+08:00</updated>
+  <id>http://bita-app.github.io/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[解决Xcode升级后插件失效的问题]]></title>
+    <link href="http://bita-app.github.io/blog/2015/03/15/jie-jue-xcodesheng-ji-hou-cha-jian-shi-xiao-de-wen-ti/"/>
+    <updated>2015-03-15T17:24:59+08:00</updated>
+    <id>http://bita-app.github.io/blog/2015/03/15/jie-jue-xcodesheng-ji-hou-cha-jian-shi-xiao-de-wen-ti</id>
+    <content type="html"><![CDATA[<h2>问题</h2>
+
+<p> 今天升级了xcode到6.2，给代码加注释的时候习惯性的输入了///，发现并没有自动生成注释格式。又看了一下菜单栏，并没有找到VVDocumenter插件，而且所有之前安装的插件都消失了。怎么把他们找回来呢？查了下，找到以下解决方案。</p>
+
+<h2>解决方案</h2>
+
+<ol>
+<li>前往到插件安装目录：~/Library/Application Support/Developer/Shared/Xcode/Plug-ins；</li>
+<li>右键单击需要修改的插件==》显示包内容==》双击Contents==》打开Info.plist文件；</li>
+<li>找到 DVTPlugInCompatibilityUUIDs，这是个数组，包含多条记录，在其中添加一条<code>A16FF353-8441-459E-A50C-B071F53F51B7</code>。</li>
+<li>重启xcode，修改过的插件就回来了。</li>
+</ol>
+
+
+<h2>原理</h2>
+
+<p><code>A16FF353-8441-459E-A50C-B071F53F51B7</code>是什么鬼？<code>DVTPlugInCompatibilityUUIDs</code>又是什么东东？查了一下，原来为了解决插件兼容性的问题，<code>DVTPlugInCompatibilityUUIDs</code>会保存支持的Xcode版本对应的uuid，而<code>A16FF353-8441-459E-A50C-B071F53F51B7</code>就是Xcode6.2对应的uuid。</p>
+
+<p>那么怎么查到当前版本的uuid呢？去这个文件下找就可以了<code>/Applications/Xcode.app/Contents/PlugIns/DVTiOSPlistStructDefs.dvtplugin/Contents/Info.plist</code>。当然，有时候Xcode的安装路径会有所改变，下面的目录结构也会有所改变，总之打开Xcode的app包，搜索一下这个关键字就可以了。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Swift实践：开始swift]]></title>
+    <link href="http://bita-app.github.io/blog/2015/02/03/swiftshi-jian/"/>
+    <updated>2015-02-03T20:38:25+08:00</updated>
+    <id>http://bita-app.github.io/blog/2015/02/03/swiftshi-jian</id>
+    <content type="html"><![CDATA[<h3>引言</h3>
+
+<p>声称一种语言优于另一种语言被认为是不礼貌的行为。但是，没有一个编程语言的设计者会相信“不同的语言各有千秋”这种文绉绉的客套话。                                                    ————《黑客与画家》</p>
+
+<p>oc在语言排行榜上的位次逐月下降，而swift在逐月上升。相信swift取代oc的地位不会太久远。开始学习和使用swift吧，至少可以通过swift这扇窗，接触很多其它语言的编程思想。</p>
+
+<h3>新建项目</h3>
+
+<p>1、在iOS开发领域，swift语言只支持iOS7.0以上的系统。</p>
+
+<p>2、新建一个swift语言项目,和oc项目没有太多区别，简单看一下：</p>
+
+<ul>
+<li>.h和.m文件现在是一个.swift文件。</li>
+<li>项目中找不到main函数入口。AppDelegate文件中，在类体之前有一行<code>@UIApplicationMain</code>标记，这个标记做的事情就是将被标注的类作为委托，去创建一个 UIApplication 并启动整个程序。在编译的时候，编译器将寻找这个标记的类，并自动插入像 main 函数这样的模板代码。</li>
+<li>oc中引入头文件，在swift中对应引入模块。<code>#import &lt;UIKit/UIKit.h&gt;</code>只需写成<code>import UIKit</code>。</li>
+<li>除引入其它模块外，同一模块内的类之间相互调用不需要显式引用。一般一个target对应同一个module。不同的静态库对应不同的module，所以引入静态库时要import相应的module name。工程文件target设置中有Product module name一项。这一module name在使用oc和swift混编时需要用到。</li>
+<li>AppDelegate类的声明，<code>class AppDelegate: UIResponder, UIApplicationDelegate</code>，可以看出，继承的类和遵守的协议，写法上没有什么区别。和oc一样，swift不支持多继承，但是可以通过协议的方式达到类似的效果。</li>
+<li>和oc不同的是，类不必都派生于一个NSObject一样的基类，你可以实现自己的基类。从这点说，swift更开放，我们可以期待swift在更多领域大展身手。另外，这点和cocoa框架有些矛盾，cocoa框架下所有对象都继承自NSObject类。这在oc和swift混编时会有一些限制，只有继承自NSObject类型的swift类才能在oc中使用。</li>
+<li>AppDelegate中的属性声明：<code>var window: UIWindow?</code>，属性和成员变量，不像oc那样区分，不需要加<code>@property</code>修饰符。类中最外层（不在方法体内）声明的常量和变量，都是属性，可以通过.去获取。属性有访问级别的限制，分为public、internal、private三种，默认是internal，即可以被自己模块或应用中被访问到。</li>
+<li>AppDelegate中方法声明：</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>func application(application: UIApplication,didFinishLaunchingWithOptions launchOptions:[NSObject:AnyObject]?) -&gt; Bool </span></code></pre></td></tr></table></div></figure>
+
+
+<p>，可查看swift语言说明，详不赘言。</p>
+
+<ul>
+<li>单行语句末尾不必加分号。</li>
+</ul>
+
+
+<p>3、
+    接下来应该怎么写呢？</p>
+
+<h3>UIViewController</h3>
+
+<p>1、viewDidLoad方法，子类继承父类的方法，需要加override关键字，否则编译器会认为你定义了重名的方法，会报错。</p>
+
+<p>2、如果要在view上添加一个tableView：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>let tableView = UITableView(frame: self.view.frame)
+</span><span class='line'>tableView.backgroundColor = UIColor.redColor()
+</span><span class='line'>self.view.addSubview(tableView)   </span></code></pre></td></tr></table></div></figure>
+
+
+<p>生成一个UITableView的实例，不需要经过alloc、initWithFrame等方法调用，而是直接使用UITableView的初始化器（initializer）。如不需要设定frame，可以直接写成UITableView()。初始化器（initializer）和方法不同，init属于关键字，非方法名。因此不需通过对象调用init,而是在类名后加括号，括号内指定参数。</p>
+
+<p>方法调用使用.符号，更接近其它语言的语法。</p>
+
+<p>3、从nib中添加一个IBOutlet属性：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@IBOutlet var scrollView : UIScrollView!</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  !表示强行拆包，也就是说这个变量一定要有非nil的值。详情可查阅swift语言中optional变量和?、!的说明。  <br/>
+    添加一个IBAction方法：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@IBAction func didClickButton(sender:UIButton){
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>4、如需打印log，可以使用println函数。如<code>println("tableview frame:\(tableView.frame)")</code>其中，使用<code>\(variable)</code>的方式可以将变量格式化插入到字符串中。</p>
+
+<h3>和oc混编</h3>
+
+<p>1、swift中引用oc类：<br/>
+如果是swift项目，初次创建oc文件，会有提示创建一个桥接头文件，只需将需要引用的oc类的头文件在桥接文件中引入即可。</p>
+
+<p>更一般的，可以在工程文件中，选中相应的target，在Build Settings一栏中搜Objective-C Bridging Header一项，指定一个头文件，并在这个头文件中import需要引用的oc类的头文件即可。</p>
+
+<p>2、oc中引用swift类：<br/>
+更简单，只需先找到你要引用的swift类所在的module名。一般在target的Build Settings中，搜索Product Module Name一项。比如我查到这一项的配置是YCApp，然后在需要引入swift类的oc文件中，import &ldquo;YCApp-swift.h&#8221;即可，这样这个module下所有的类（有一个限制，那就是继承自NSObject的类，否则oc不能识别。）都可以在这个oc文件中使用了。这个头文件在工程中找不到，但是按cmd并点击可以看到它的内容。clean之后重新编译会重新生成。so easy。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[转]利用Octopress搭建一个Github博客]]></title>
+    <link href="http://bita-app.github.io/blog/2014/10/13/li-yong-octopressda-jian-%5B%3F%5D-ge-githubbo-ke/"/>
+    <updated>2014-10-13T11:00:34+08:00</updated>
+    <id>http://bita-app.github.io/blog/2014/10/13/li-yong-octopressda-jian-[?]-ge-githubbo-ke</id>
+    <content type="html"><![CDATA[<p>来源：<a href="http://beyondvincent.com/blog/2013/08/03/108-creating-a-github-blog-using-octopress/">http://beyondvincent.com/blog/2013/08/03/108-creating-a-github-blog-using-octopress/</a>
+<img src="http://beyondvincent.com/images/2013/08/github_page_and-octopress.png" alt="image" /></p>
+
+<h2>小引</h2>
+
+<p><code>Octopress</code>是利用<code>Jekyll</code>博客引擎开发的一个博客系统，生成的静态页面能够很好的在github page上展现。号称是hacker专属的一个博客系统(<code>A blogging framework for hackers.</code>)</p>
+
+<p>根据大家的反应，本文我就来介绍一下如何在苹果电脑(OS X 10.8.3)利用Octopress搭建一个Github博客。本文需要读者熟悉一些shell命令，并掌握基本的git操作。</p>
+
+<h2>目录</h2>
+
+<ul>
+<li>1、安装Ruby</li>
+<li>2、安装Octopress</li>
+<li>3、配置Octopress</li>
+<li>4、将博客部署到GitHub上</li>
+<li>5、开始写博客</li>
+<li>6、更多操作</li>
+<li>7、小结</li>
+</ul>
+
+
+<h3>1、安装ruby</h3>
+
+<p>Octopress需要Ruby环境，RVM(Ruby Version Manager)负责安装和管理Ruby的环境。所以我们先在终端输入如下命令，来安装RVM：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>curl -L https://get.rvm.io | bash -s stable --ruby</span></code></pre></td></tr></table></div></figure>
+
+
+<p>接着是安装Ruby 1.9.3，在终端依次运行如下命令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rvm install 1.9.3
+</span><span class='line'>rvm use 1.9.3
+</span><span class='line'>rvm rubygems latest</span></code></pre></td></tr></table></div></figure>
+
+
+<p>完成上面的操作之后，运行<code>ruby --version</code>应该可以看到ruby 1.9.3环境已经安装好了。
+参考：<a href="http://octopress.org/docs/setup/rvm/">Installing Ruby With RVM</a></p>
+
+<h3>2、安装Octopress</h3>
+
+<p>在安装Octopress之前，请确保你的电脑上已经安装有git了，在终端输入<code>git --version</code>，应该可以看到电脑中的git版本(我电脑上输出:<code>git version 1.7.12.4 (Apple Git-37</code>))，如果没有显示相关内容，请先安装git。
+git安装之后，利用git命令将octopress从github上clone到本机，如下命令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git octopress
+</span><span class='line'>cd octopress    # If you use RVM, You'll be asked if you trust the .rvmrc file (say yes).
+</span><span class='line'>ruby --version  # Should report Ruby 1.9.3</span></code></pre></td></tr></table></div></figure>
+
+
+<p>接着安装相关依赖项：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install bundler
+</span><span class='line'>rbenv rehash    # If you use rbenv, rehash to be able to run the bundle command
+</span><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最后安装默认的Octopress 主题。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>参考： <a href="http://octopress.org/docs/setup/">Octopress Setup</a></p>
+
+<h3>3、配置Octopress</h3>
+
+<p>Octopress的作者已经尽量让配置简化了。大多数情况下只需要配置<code>_config.yml</code>和<code>Rakefile</code>文件即可。其中Rakefile是跟博客部署相关，一般情况下并不需要修改这个文件，除非使用了rsync。
+config.yml是博客重要的一个配置文件，在config.yml文件中有三大配置项：<code>Main Configs</code>、<code>Jekyll</code> &amp; <code>Plugins和3rd Party Settings</code>。
+一般，该文件中其中<code>url</code>是必须要填写的，这里的url是在github上创建的一个仓库地址，具体请看第四步中创建的地址。另外再修改一下<code>title</code>、<code>subtitle</code>和<code>author</code>，根据需求，在开启一些第三方组件服务。
+关于<code>_config.yml</code>文件中的更多内容，请看这里的内容：<a href="http://octopress.org/docs/configuring/">Configuring Octopress</a>
+建议：最好把里面的twitter相关的信息全部删掉，否则由于GFW的原因，将会造成页面load很慢。同理，修改定制文件<code>source/_includes/custom/head.html</code>把google的自定义字体去掉。from<a href="http://blog.devtang.com/blog/2012/02/10/setup-blog-based-on-github/">唐巧的博文中—配置</a>。</p>
+
+<h3>4、将博客部署到GitHub上</h3>
+
+<p>Github的<code>Page service</code>可以免费托管博客，并且还可以自定义域名。
+首先需要在GitHub上创建一个仓库，并将仓库名称按照这样的方式进行命名：<code>username.github.com</code>或<code>organization.github.com</code>。等后面配置完毕之后，我们就可以在浏览器中使用页面地址<code>http://username.github.com</code>来访问我们的博客。一般来说，我们希望在将博客的源码放到source分支下，并把生成的内容提交到master分支。
+创建好仓库之后，我们需要利用octopress的一个配置rake任务来自动配置上面创建的仓库：可以让我们方便的部署GitHub page。在终端输入如下命令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake setup_github_pages</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上面的命令会做一些事情(详细介绍看下面给出的参考链接)。其中最主要的就是创建一个_deploy目录，目录用来存放部署到master分支的内容。期间会要求你输入仓库的url，根据提示，进行输入即可。
+完成上面的命令之后，我们就可以生成博客并真正的部署到仓库中了。执行如下命令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake generate
+</span><span class='line'>$ rake deploy</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上面的命令首先生成博客文件，并将生成的博客文件拷贝到_deploy/目录下，然后将这些内容添加到git中，并commit和push到仓库的master分支。
+现在可以访问<code>http://username.github.com</code>了。注意：有时候可能会有延时，要等几分钟才能打开。
+至此，我们的博客已经完成基本的部署，不过博客的source需要单独提交，执行如下命令就可以将source提交到仓库的source分支下。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git add .
+</span><span class='line'>$ git commit -m 'Initial source commit'
+</span><span class='line'>$ git push origin source</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果在部署到仓库之前，需要先预览一下博客，可以在终端输入<code>rake preview</code>命令，然后就能在浏览器中进行本地预览访问了：<code>http://127.0.0.1:4000/或http://localhost:4000/</code>，效果跟仓库中的一样。
+参考：<a href="http://octopress.org/docs/deploying/">Deploying to Github Pages</a></p>
+
+<h3>5、开始写博客</h3>
+
+<p>Octopress为我们提供了一些task来创建博文和页面。博文必须存储在<code>source/_posts</code>目录下，并且需要按照Jekyll的命名规范对文章进行命名：<code>YYYY-MM-DD-post-title.markdown</code>。文章的名字会被当做url的一部分，而其中的日期用于对博文的区分和排序。
+通过Octopress提供的task可以正确的按照命名规范创建一个博文，并且在博文中会附带常用的一些yaml元数据。只需要在终端输入如下命令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_post["title"]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中title为博文的文件名，创建出来的文件默认是markdown格式。上面的命令会创建出这样一个文件：<code>source/_posts/2013-08-03-title.markdown</code>。打开这个文件，可以看到里面有如下一些内容了(告诉<code>Jekyll</code>博客引擎如何处理博文和页面)：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>---
+</span><span class='line'>layout: post
+</span><span class='line'>title: "title"
+</span><span class='line'>date: 2013-08-03 16:36
+</span><span class='line'>comments: true
+</span><span class='line'>categories: 
+</span><span class='line'>---</span></code></pre></td></tr></table></div></figure>
+
+
+<p>接着我们就可以在这个文件中写我们的博文啦。完成之后，我们可以预览和部署博文。下面是创建并部署博文的一个完整过程：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake new_post["New Post"]
+</span><span class='line'>$ rake generate
+</span><span class='line'>$ git add .
+</span><span class='line'>$ git commit -am "Some comment here." 
+</span><span class='line'>$ git push origin source
+</span><span class='line'>$ rake deploy</span></code></pre></td></tr></table></div></figure>
+
+
+<p>参考：<a href="http://octopress.org/docs/blogging/">Blogging Basics</a></p>
+
+<h3>6、更多操作</h3>
+
+<p>在搭建博客的时候，我们可能会对博客做一些配置，例如添加评论、域名解析、分享等。这些内容我写在另外一篇文章中，会经常更新，请前往观看：<a href="http://beyondvincent.com/blog/2013/07/27/107-hello-page-of-github/"><code>你好！github页面</code></a>。</p>
+
+<h3>7、小结</h3>
+
+<p>本文介绍了如何利用<code>Octopress</code>搭建一个Github博客。大家在搭建的时候，要是遇到问题，可以回复我。</p>
+]]></content>
+  </entry>
+  
+</feed>
