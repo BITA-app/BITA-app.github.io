@@ -4,7 +4,7 @@
   <title><![CDATA[走向敏捷]]></title>
   <link href="http://bita-app.github.io/atom.xml" rel="self"/>
   <link href="http://bita-app.github.io/"/>
-  <updated>2015-08-14T16:06:12+08:00</updated>
+  <updated>2015-08-14T17:45:49+08:00</updated>
   <id>http://bita-app.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -18,7 +18,16 @@
     <link href="http://bita-app.github.io/blog/2015/03/15/jie-jue-xcodesheng-ji-hou-cha-jian-shi-xiao-de-wen-ti/"/>
     <updated>2015-03-15T17:24:59+08:00</updated>
     <id>http://bita-app.github.io/blog/2015/03/15/jie-jue-xcodesheng-ji-hou-cha-jian-shi-xiao-de-wen-ti</id>
-    <content type="html"><![CDATA[<h2>问题</h2>
+    <content type="html"><![CDATA[<h2>终极方案</h2>
+
+<p>在终端输入以下命令回车，可以解决升级到任何版本产生的插件失效问题。</p>
+
+<p><code>find ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins -name Info.plist -maxdepth 3 | xargs -I{} defaults write {} DVTPlugInCompatibilityUUIDs -array-add `defaults read /Applications/Xcode.app/Contents/Info.plist DVTPlugInCompatibilityUUID`
+</code></p>
+
+<p>看到这里如果不明白，可以看下面遇到的问题和手动版方案及原理。</p>
+
+<h2>问题</h2>
 
 <p> 今天升级了xcode到6.2，给代码加注释的时候习惯性的输入了///，发现并没有自动生成注释格式。又看了一下菜单栏，并没有找到VVDocumenter插件，而且所有之前安装的插件都消失了。怎么把他们找回来呢？查了下，找到以下解决方案。</p>
 
@@ -83,7 +92,7 @@
 <p>3、
     接下来应该怎么写呢？</p>
 
-<h3>UIViewController</h3>
+<h3>简单编码</h3>
 
 <p>1、viewDidLoad方法，子类继承父类的方法，需要加override关键字，否则编译器会认为你定义了重名的方法，会报错。</p>
 
@@ -126,7 +135,7 @@
 <p>更一般的，可以在工程文件中，选中相应的target，在Build Settings一栏中搜Objective-C Bridging Header一项，指定一个头文件，并在这个头文件中import需要引用的oc类的头文件即可。</p>
 
 <p>2、oc中引用swift类：<br/>
-更简单，只需先找到你要引用的swift类所在的module名。一般在target的Build Settings中，搜索Product Module Name一项。比如我查到这一项的配置是YCApp，然后在需要引入swift类的oc文件中，import &ldquo;YCApp-swift.h&#8221;即可，这样这个module下所有的类（有一个限制，那就是继承自NSObject的类，否则oc不能识别。）都可以在这个oc文件中使用了。这个头文件在工程中找不到，但是按cmd并点击可以看到它的内容。clean之后重新编译会重新生成。so easy。</p>
+更简单，只需先找到你要引用的swift类所在的module名。一般在target的Build Settings中，搜索Product Module Name一项。比如我查到这一项的配置是YCApp，然后在需要引入swift类的oc文件中，import &ldquo;YCApp-swift.h"即可，这样这个module下所有的类（有一个限制，那就是继承自NSObject的类，否则oc不能识别。）都可以在这个oc文件中使用了。这个头文件在工程中找不到，但是按cmd并点击可以看到它的内容。clean之后重新编译会重新生成。so easy。</p>
 ]]></content>
   </entry>
   
