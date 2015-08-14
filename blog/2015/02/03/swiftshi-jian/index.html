@@ -162,7 +162,7 @@
 <p>更一般的，可以在工程文件中，选中相应的target，在Build Settings一栏中搜Objective-C Bridging Header一项，指定一个头文件，并在这个头文件中import需要引用的oc类的头文件即可。</p>
 
 <p>2、oc中引用swift类：<br/>
-更简单，只需先找到你要引用的swift类所在的module名。一般在target的Build Settings中，搜索Product Module Name一项。比如我查到这一项的配置是YCApp，然后在需要引入swift类的oc文件中，import &ldquo;YCApp-swift.h"即可，这样这个module下所有的类（有一个限制，那就是继承自NSObject的类，否则oc不能识别。）都可以在这个oc文件中使用了。这个头文件在工程中找不到，但是按cmd并点击可以看到它的内容。clean之后重新编译会重新生成。so easy。</p>
+更简单，只需先找到你要引用的swift类所在的module名。一般在target的Build Settings中，搜索Product Module Name一项。比如我查到这一项的配置是YCApp，然后在需要引入swift类的oc文件中，import &ldquo;YCApp-swift.h&#8221;即可，这样这个module下所有的类（有一个限制，那就是继承自NSObject的类，否则oc不能识别。）都可以在这个oc文件中使用了。这个头文件在工程中找不到，但是按cmd并点击可以看到它的内容。clean之后重新编译会重新生成。so easy。</p>
 </div>
 
 
